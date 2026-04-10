@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', 'Poppins', 'Arial', sans-serif;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.menu {
+    width: 100%;
+}
+
+.menu-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.menu-item {
+    cursor: pointer;
+    width: fit-content;
+    min-width: 250px;
+}
+
+/* Wrapper que contém a barra e a palavra */
+.palavra-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+}
+
+/* Barra deslizante - começa um POUCO MAIS AFASTADA à esquerda da palavra */
+.barra-deslizante {
+    position: absolute;
+    top: 0;
+    left: -12px;  /* Alterado de 0 para -12px - agora mais afastada */
+    width: 4px;
+    height: 100%;
+    background-color: #4d9eff;
+    transform: translateX(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+}
+
+/* Palavra do menu */
+.palavra {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #000000;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.7);
+    position: relative;
+    z-index: 2;
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: inline-block;
+    background-color: #000000;
+    transition: color 0.3s ease, -webkit-text-stroke 0.3s ease;
+    padding: 0;
+}
+
+/* Quando o mouse passa, a barra DESLIZA até o FINAL da palavra */
+.menu-item:hover .barra-deslizante {
+    transform: translateX(calc(100% + 12px)); /* Ajustado para compensar o left negativo */
+}
+
+/* A palavra é pintada de azul durante o movimento */
+.menu-item:hover .palavra {
+    color: #4d9eff;
+    -webkit-text-stroke: 1px #4d9eff;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .menu-list {
+        gap: 1.5rem;
+    }
+    
+    .barra-deslizante {
+        left: -10px;
+    }
+    
+    .menu-item:hover .barra-deslizante {
+        transform: translateX(calc(100% + 10px));
+    }
+}
+
+/* Ajustes para garantir que a barra seja visível */
+.menu-item {
+    user-select: none;
+}
+
+/* Garantir transição suave */
+.barra-deslizante {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
